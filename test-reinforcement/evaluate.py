@@ -11,7 +11,7 @@ from tqdm import tqdm
 from time import clock
 
 from agent import Agent
-from utils import get_state, get_stock_data, format_currency, format_position
+from utils import get_state, format_currency, format_position
 
 
 @click.command()

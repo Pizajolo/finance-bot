@@ -30,11 +30,6 @@ def sigmoid(x):
         print("Error in sigmoid: " + err)
 
 
-# Not necessary, delete
-def get_stock_data(stock_file):
-    """ Reads stock data from csv file. """
-    df = pd.read_csv(stock_file)
-    return list(df['Adj Close'])
 
 
 def get_state(data, data2, t, n_days):
@@ -59,6 +54,7 @@ def get_state(data, data2, t, n_days):
 
     return np.array([res])
 
+# Debug Function, delete
 #  [1,3,5,8,1,9,8,1,5,1,5,1,5]
 ergebnis = get_state([9,3,8,8,1,1,8,1,5,1,5,4,5],None,2,7)
 print(ergebnis)

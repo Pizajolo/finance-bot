@@ -14,7 +14,6 @@ from agent import Agent
 from evaluate import evaluate_model
 from utils import (
     get_state,
-    get_stock_data,
     format_currency,
     format_position
 )
