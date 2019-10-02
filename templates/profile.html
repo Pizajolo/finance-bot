@@ -9,10 +9,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="home"><i
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="home"><i
                             class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
                     <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profile"><i
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="profile"><i
                             class="fas fa-user-alt"></i><span>Profile</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline">
@@ -27,8 +27,8 @@
                         <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button">
                             <i class="fas fa-bars"></i></button>
                         <form action="/analyse" method="GET" class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" name="stock"
-                                                            type="text" placeholder="Search for Share...">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" name="stock"
+                                                            placeholder="Search for Share...">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i>
                                     </button>
@@ -71,7 +71,7 @@
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                                                            data-toggle="dropdown" aria-expanded="false"
                                                                            href="#"><span
-                                        class="d-none d-lg-inline mr-2 text-gray-600 small">{{ user.username }}</span><img
+                                        class="d-none d-lg-inline mr-2 text-gray-600 small">{{user.username}}</span><img
                                         class="border rounded-circle img-profile"
                                         src="../static/assets/img/avatars/avatar5.jpeg?h=35dc45edbcda6b3fc752dab2b0f082ea"></a>
                                     <div
@@ -91,83 +91,92 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-center text-dark mb-1">Find the next great Investment</h3>
-                    <div class="row text-center" style="margin-top: 50px;">
-                        <div class="col" style="padding: 0px;padding-right: 0px;padding-left: 0px;">
-
-                            <!--Main Search-->
-                            <form action="/analyse" method="GET">
-                                <div class="input-group" style="background-color: rgba(0,0,0,0);"><input id="form-input-main" name="stock"
-                                        class="bg-dark form-control form-control-lg border-0 small"
-                                        type="text" placeholder="Search for Stocks..."
-                                        style="background-color: rgb(85,82,82);color: rgb(231,232,238);min-width: 50px;">
-                                    <div class="input-group-append">
-                                        <button id="search_main" class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i>
-                                        </button>
+                    <h3 class="text-dark mb-4">Profile</h3>
+                    <div class="row mb-3">
+                        <div class="col-lg-4">
+                            <div class="card mb-3">
+                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
+                                                                               src="../static/assets/img/dogs/image2.jpeg?h=a0a7d00bcd8e4f84f4d8ce636a8f94d4"
+                                                                               width="160" height="160">
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary btn-sm" type="button">Change Photo</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="col">
-                            <!-- Start: Basic Card -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary m-0 font-weight-bold">Why trust us?</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="m-0">The styling for this basic card example is created by using default
-                                        Bootstrap utility classes. By using utility classes, the style of the card
-                                        component can be easily modified with no need for any custom CSS!</p>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label
+                                                                for="username"><strong>Username</strong></label><input
+                                                                class="form-control" type="text" placeholder="{{user.username}}"
+                                                                name="username"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="email"><strong>Email
+                                                            Address</strong></label><input class="form-control"
+                                                                                           type="email"
+                                                                                           placeholder="{{user.email}}"
+                                                                                           name="email"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" type="submit">Save Settings
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- End: Basic Card -->
-                        </div>
-                        <div class="col">
-                            <!-- Start: Basic Card -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary m-0 font-weight-bold">Why is AI better than humans?</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="m-0">The styling for this basic card example is created by using default
-                                        Bootstrap utility classes. By using utility classes, the style of the card
-                                        component can be easily modified with no need for any custom CSS!</p>
-                                </div>
-                            </div>
-                            <!-- End: Basic Card -->
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="col">
-                            <!-- Start: Basic Card -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary m-0 font-weight-bold">How does it work?</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="m-0">The styling for this basic card example is created by using default
-                                        Bootstrap utility classes. By using utility classes, the style of the card
-                                        component can be easily modified with no need for any custom CSS!</p>
-                                </div>
-                            </div>
-                            <!-- End: Basic Card -->
-                        </div>
-                        <div class="col">
-                            <!-- Start: Basic Card -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary m-0 font-weight-bold">Costes and how to test it for
-                                        FREE</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p class="m-0">The styling for this basic card example is created by using default
-                                        Bootstrap utility classes. By using utility classes, the style of the card
-                                        component can be easily modified with no need for any custom CSS!</p>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Change Password</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="old_pw"><strong>Old
+                                                            Password</strong><br></label>
+                                                            <!-- Start: #old_pw --><input
+                                                                    class="form-control form-control-user"
+                                                                    type="password" id="old_pw"
+                                                                    placeholder="Password" name="password">
+                                                            <!-- End: #old_pw -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="new_pw"><strong>New
+                                                            Password</strong><br></label>
+                                                            <!-- Start: #new_pw --><input
+                                                                    class="form-control form-control-user"
+                                                                    type="password" id="new_pw"
+                                                                    placeholder="New Password" name="password">
+                                                            <!-- End: #new_pw -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" type="submit">Change
+                                                        Password
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- End: Basic Card -->
                         </div>
                     </div>
                 </div>
@@ -181,5 +190,3 @@
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 {% endblock %}
-
-

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex">
+                        <div class="flex-grow-1 bg-register-image"
+                             style="background-image: url('../static/assets/img/dogs/image2.jpeg?h=a0a7d00bcd8e4f84f4d8ce636a8f94d4');"></div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h4 class="text-dark mb-4">Create an Account!</h4>
+                            </div>
+                                <div class="form-group row" style="margin-left: 0px;margin-right: 0px;"><input
+                                        class="form-control form-control-user" type="text" id="signup-user"
+                                        placeholder="Username" name="last_name"></div>
+                                <div class="form-group"><input class="form-control form-control-user" type="email"
+                                                               id="signup-mail" aria-describedby="emailHelp"
+                                                               placeholder="Email Address" name="email"></div>
+                                <div class="form-group"><input class="form-control form-control-user"
+                                                                              type="password" id="signup-pass"
+                                                                              placeholder="Password" name="password">
+                                </div>
+                                <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="signup-button">Register
+                                    Account
+                                </button>
+                                <hr>
+                            <div class="text-center"><a class="small" href="forgot-password">Forgot Password?</a>
+                            </div>
+                            <div class="text-center"><a class="small" href="login">Already have an account?
+                                Login!</a></div>
+                            <div class="text-center"><a class="small" href="landing">Want to learn more about us?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="../static/assets/js/script.min.js?h=cda46db5f8853791105ff4715b7208f3"></script>
+    <script src="../static/js/scripts.js"></script>
+{% endblock %}
