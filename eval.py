@@ -25,7 +25,7 @@ def eval(stock):
     debug = False
 
     # Load Data
-    start_test = datetime.datetime(2019, 1, 1)
+    start_test = datetime.datetime(2018, 6, 1)
     end_test = datetime.datetime.now()
 
     # Load Stock
@@ -52,6 +52,8 @@ def eval(stock):
 
     val_result, history = evaluate_model(agent, df_test_list, df2_test_list, window_size, debug)
     show_eval_result(model_name, val_result, initial_offset);
+    print(val_result)
+
 
     position = [history[0][0]] + [x[0] for x in history]
     actions = ['HOLD'] + [x[1] for x in history]
@@ -59,16 +61,27 @@ def eval(stock):
     dft['action'] = actions
     dft['number'] = 0
     dft['account'] = 0
-
+    dft["mavg100"] = dft["actual"].rolling(window=30).mean()
     # to be debugged!
+    number = 0
+    balance = 0
+
     for index, row in dft.iterrows():
         if row['action'] =="BUY":
-            row['number'] = row['number']+1
+            number = number+1
+            balance = balance - row['actual']
+
+
+            #dft.set_value(row,'number',number)
         if row['action'] == "SELL":
-            row['number'] = row['number'] - 1
+            number = number-1
+            balance = balance + row['actual']
+            #row['number'] = number
+          #  row['account'] = balance
 
+    print(number)
+    print(balance)
     return(dft)
-
 
 def switch_k_backend_device():
     import logging
@@ -86,7 +99,7 @@ def switch_k_backend_device():
 
 tf1 = eval("aapl")
 print(tf1)
-tf1.to_csv("testfile.csv")
+#tf1.to_csv("testfile.csv")
 
 
 
