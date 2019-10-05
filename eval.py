@@ -70,14 +70,14 @@ def eval(stock):
         if row['action'] =="BUY":
             number = number+1
             balance = balance - row['actual']
+            dft.set_value(index,'number',number)
+            dft.set_value(index,'account',balance)
 
-
-            #dft.set_value(row,'number',number)
         if row['action'] == "SELL":
             number = number-1
             balance = balance + row['actual']
-            #row['number'] = number
-          #  row['account'] = balance
+            dft.set_value(index, 'number', number)
+            dft.set_value(index, 'account', balance)
 
     print(number)
     print(balance)
