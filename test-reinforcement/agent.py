@@ -33,7 +33,7 @@ class Agent:
         self.action_size = 3           		# [sit, buy, sell]
         self.model_name = model_name
         self.inventory = []
-        self.memory = deque(maxlen=1000)
+        self.memory = deque(maxlen=5000) #1000
         self.first_iter = True
 
         '''model config'''
@@ -57,13 +57,13 @@ class Agent:
     def _model(self):
         """	Creates the model. """
         model = Sequential()
-        model.add(Dense(units=24, input_dim=self.state_size, kernel_initializer=self.initializer))
+        model.add(Dense(units=48, input_dim=self.state_size, kernel_initializer=self.initializer)) #24
         model.add(Activation('relu'))
-        model.add(Dense(units=64, kernel_initializer=self.initializer))
+        model.add(Dense(units=128, kernel_initializer=self.initializer)) #64
         model.add(Activation('relu'))
-        model.add(Dense(units=64, kernel_initializer=self.initializer))
+        model.add(Dense(units=128, kernel_initializer=self.initializer)) #64
         model.add(Activation('relu'))
-        model.add(Dense(units=24, kernel_initializer=self.initializer))
+        model.add(Dense(units=48, kernel_initializer=self.initializer)) #24
         model.add(Activation('relu'))
         model.add(Dense(units=self.action_size, kernel_initializer=self.initializer))
 
