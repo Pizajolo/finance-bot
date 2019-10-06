@@ -47,7 +47,7 @@ async function load_data() {
             data: {
                 labels: data['Date'],
                 datasets: [{
-                    label: 'Apple price',
+                    label: 'Price',
                     data: data['Prices'],
                     backgroundColor: 'rgba(78, 115, 223, 0.8)',
                     borderColor: 'rgba(78, 115, 223, 0.8)',
