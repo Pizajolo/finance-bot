@@ -12,6 +12,7 @@ import pandas_datareader.data as web
 import sys
 import numpy as np
 import os
+from eval import eval
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -145,15 +146,22 @@ def search():
         return redirect(url_for('login'))
     stock = request.form.get("search_query")
     print(stock)
-    # try:
-    df = web.DataReader(stock, 'yahoo',
-                          start=datetime.datetime(2018, 1, 2),  # start
-                          end=datetime.datetime(2019, 9, 10))  # end
-    prices = df['Open'].values.tolist()
+    df = eval(stock)
+    print(df)
+    prices = df['actual'].values.tolist()
     date = []
-    for i in df.index.values:
-        date.append(str(i)[:10])
-    return json.dumps({'Date': date,'Prices':prices})
+    for i in range(len(df)):
+        date.append(str(df.at[i,'Date'])[0:10])
+    # date = df['Date'].apply(str).values.tolist()
+    df.loc[df['action'] == 'HOLD', 'actual'] = None
+    df_buy = df.copy()
+    df_sell = df.copy()
+    df_buy.loc[df_buy['action'] == 'SELL', 'actual'] = None
+    prices_buy = df_buy['actual'].values.tolist()
+    df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
+    prices_sell = df_sell['actual'].values.tolist()
+    return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell},
+                      ignore_nan=True)
     # except:
     #     return json.dumps({'status': 'Stock does not exist'})
 
@@ -171,6 +179,7 @@ def analyse():
         return render_template('analyse.html', user=user, name=stock)
     except:
         return redirect(url_for('home'))
+
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":

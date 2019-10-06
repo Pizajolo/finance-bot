@@ -1,14 +1,16 @@
+# Import libraries
+import pandas as pd
+import numpy as np
+import datetime
+import pandas_datareader.data as web
+
+from evaluate import show_eval_result
+from keras import backend as K
+from agent import Agent
+from evaluate import evaluate_model
+
 def eval(stock):
-
-    # Import libraries
-    import pandas as pd
-    import numpy as np
-    import datetime
-    import pandas_datareader.data as web
-
-    from evaluate import show_eval_result
-    from agent import Agent
-    from evaluate import evaluate_model
+    K.clear_session()
     from utils import (
         get_state,
         format_currency,
@@ -52,9 +54,9 @@ def eval(stock):
 
     val_result, history = evaluate_model(agent, df_test_list, df2_test_list, window_size, debug)
     show_eval_result(model_name, val_result, initial_offset);
-    print(val_result)
+    # print(val_result)
 
-
+    K.clear_session()
     position = [history[0][0]] + [x[0] for x in history]
     actions = ['HOLD'] + [x[1] for x in history]
     dft['position'] = position
@@ -78,9 +80,11 @@ def eval(stock):
 
         dft.set_value(index, 'number', number)
         dft.set_value(index, 'account', balance)
-    print(number)
-    print(balance)
-    return(dft)
+    # print(number)
+    # print(balance)
+
+    dft = dft.reset_index()
+    return dft
 
 def switch_k_backend_device():
     import logging
@@ -96,8 +100,8 @@ def switch_k_backend_device():
 
 
 
-tf1 = eval("aapl")
-print(tf1)
+# tf1 = eval("AAPL")
+# print(tf1)
 #tf1.to_csv("testfile.csv")
 
 

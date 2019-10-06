@@ -40,31 +40,48 @@ async function load_data() {
     request.onload = () => {
         // Extract JSON data from request
         const data = JSON.parse(request.responseText);
+        console.log(data['Date']);
         const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: data['Date'],
-            datasets: [{
-                label: 'Stock price',
-                data: data['Prices'],
-                backgroundColor: 'rgba(78, 115, 223, 0.8)',
-                borderColor: 'rgba(78, 115, 223, 0.8)',
-                fill: false,
-                pointRadius: 0
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data['Date'],
+                datasets: [{
+                    label: 'Apple price',
+                    data: data['Prices'],
+                    backgroundColor: 'rgba(78, 115, 223, 0.8)',
+                    borderColor: 'rgba(78, 115, 223, 0.8)',
+                    fill: false,
+                    pointRadius: 0
+                }, {
+                    label: 'Buy',
+                    data: data['Buy_Prices'],
+                    backgroundColor: 'rgba(78, 223, 113, 1)',
+                    borderColor: 'rgba(78, 223, 113, 1)',
+                    fill: true,
+                    // pointRadius: 1,
+                    showLine: false
+                }, {
+                    label: 'Sell',
+                    data: data['Sell_Prices'],
+                    backgroundColor: 'rgba(223, 78, 113, 1)',
+                    borderColor: 'rgba(223, 78, 113, 1)',
+                    fill: true,
+                    // pointRadius: 1,
+                    showLine: false
                 }]
             },
-            maintainAspectRatio: false
-        }
-    });
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                maintainAspectRatio: false
+            }
+        });
     };
 
     // Add data to send with request
