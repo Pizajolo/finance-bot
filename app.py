@@ -4,11 +4,13 @@ from scripts import tabledef
 from scripts import forms
 from scripts import helpers
 from flask import Flask, redirect, url_for, render_template, request, session
-import json
+# import json
+import simplejson as json
 import pandas as pd
 import datetime
 import pandas_datareader.data as web
 import sys
+import numpy as np
 import os
 
 app = Flask(__name__)
@@ -120,11 +122,20 @@ def forgot_pw():
 # -------- Load CSV Landing Page ---------------------------------------------------------- #
 @app.route('/graph')
 def graph():
-    csv_file_path = 'media/AAPL.csv'
+    # csv_file_path = 'media/AAPL.csv'
+    csv_file_path = 'testfile.csv'
     df = pd.read_csv(csv_file_path)
-    data_json = df.to_json(orient='records')
+    prices = df['actual'].values.tolist()
+    date = df['Date'].values.tolist()
 
-    return data_json
+    df.loc[df['action'] == 'HOLD', 'actual'] = None
+    df_buy = df.copy()
+    df_sell = df.copy()
+    df_buy.loc[df_buy['action'] == 'SELL', 'actual'] = None
+    prices_buy = df_buy['actual'].values.tolist()
+    df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
+    prices_sell = df_sell['actual'].values.tolist()
+    return json.dumps({'Date': date,'Prices':prices, 'Buy_Prices':prices_buy, 'Sell_Prices':prices_sell},ignore_nan=True)
 
 
 # -------- Search Share ---------------------------------------------------------- #
@@ -142,7 +153,6 @@ def search():
     date = []
     for i in df.index.values:
         date.append(str(i)[:10])
-    data = {"Date": date, "Prices":prices}
     return json.dumps({'Date': date,'Prices':prices})
     # except:
     #     return json.dumps({'status': 'Stock does not exist'})

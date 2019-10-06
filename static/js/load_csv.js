@@ -1,38 +1,39 @@
-const xlabels = [];
-const y_open = [];
-const y_high = [];
-
 async function getData() {
     const response = await fetch('graph');
     const data = await response.json();
-    for(let i in data) {
-        xlabels.push(data[i]["Date"]);
-        y_open.push(data[i]["Open"]);
-        y_high.push(data[i]["High"])
-    }
+    return data;
 }
 
 async function renderChart() {
-    await getData();
+    let data = await getData();
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: xlabels,
+            labels: data['Date'],
             datasets: [{
                 label: 'Apple price',
-                data: y_open,
+                data: data['Prices'],
                 backgroundColor: 'rgba(78, 115, 223, 0.8)',
                 borderColor: 'rgba(78, 115, 223, 0.8)',
                 fill: false,
                 pointRadius: 0
             },{
-                label: 'Apple price High',
-                data: y_high,
-                backgroundColor: 'rgba(78, 223, 113, 0.8)',
-                borderColor: 'rgba(78, 223, 113, 0.8)',
-                fill: false,
-                pointRadius: 0
+                label: 'Buy',
+                data: data['Buy_Prices'],
+                backgroundColor: 'rgba(78, 223, 113, 1)',
+                borderColor: 'rgba(78, 223, 113, 1)',
+                fill: true,
+                // pointRadius: 1,
+                showLine: false
+            },{
+                label: 'Sell',
+                data: data['Sell_Prices'],
+                backgroundColor: 'rgba(223, 78, 113, 1)',
+                borderColor: 'rgba(223, 78, 113, 1)',
+                fill: true,
+                // pointRadius: 1,
+                showLine: false
             }]
         },
         options: {
