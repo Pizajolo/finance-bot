@@ -9,7 +9,7 @@ from keras import backend as K
 from agent import Agent
 from evaluate import evaluate_model
 
-def eval(stock):
+def eval(stock, abo=False):
     K.clear_session()
     from utils import (
         get_state,
@@ -28,7 +28,12 @@ def eval(stock):
 
     # Load Data
     start_test = datetime.datetime(2018, 6, 1)
-    end_test = datetime.datetime.now()
+
+    if abo == True:
+        end_test = datetime.datetime.now()
+    else:
+        end_test = datetime.datetime.now()-datetime.timedelta(days = 10) # in case of no abo: only old state available
+
 
     # Load Stock
     df_test = web.DataReader([stock], 'yahoo',
@@ -63,8 +68,9 @@ def eval(stock):
     dft['action'] = actions
     dft['number'] = 0
     dft['account'] = 0
-    dft["mavg100"] = dft["actual"].rolling(window=30).mean()
-    # to be debugged!
+    dft['value'] = 0
+    #dft["mavg100"] = dft["actual"].rolling(window=30).mean()
+
     number = 0
     balance = 0
 
@@ -78,8 +84,10 @@ def eval(stock):
             number = number-1
             balance = balance + row['actual']
 
+        value = number*row['actual'] + balance # Value of stocks and Balance
         dft.set_value(index, 'number', number)
         dft.set_value(index, 'account', balance)
+        dft.set_value(index, 'value', value)
     # print(number)
     # print(balance)
 
@@ -100,8 +108,9 @@ def switch_k_backend_device():
 
 
 
-# tf1 = eval("AAPL")
-# print(tf1)
+#tf1 = eval("GOOG")
+
+#print(tf1)
 #tf1.to_csv("testfile.csv")
 
 

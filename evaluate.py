@@ -79,7 +79,7 @@ def evaluate_model(agent, data, data2, window_size, debug):
         next_state = get_state(data, data2, t + 1, window_size + 1)
         reward = 0
         # BUY
-        if action == 1:
+        if action == 1 and len(agent.inventory) < 11: # Max 10 Stocks allowed
             agent.inventory.append(data[t])
             history.append((data[t], 'BUY'))
             if debug:
