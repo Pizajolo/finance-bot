@@ -114,7 +114,7 @@ def train_model(agent, episode, data, data2, ep_count=100, batch_size=32, window
         next_state = get_state(data, data2, t + 1, window_size + 1)
         reward = 0
         # BUY
-        if action == 1:
+        if action == 1 and len(agent.inventory) < 11: # Max 10 Stocks allowed
             agent.inventory.append(data[t])
         # SELL
         elif action == 2 and len(agent.inventory) > 0:
