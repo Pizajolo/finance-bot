@@ -20,10 +20,10 @@ def eval(stock, abo=False):
     switch_k_backend_device() #Train on CPU instead of GPU (CPU is faster with this model)
 
     # Init parameters
-    window_size = 10
+    window_size = 12
     batch_size = 16
     #ep_count = 100  # 3-5 for debugging, otherwise 20-100
-    model_name = 'model_w10_10'
+    model_name = 'model_w12v4_MTH_90'
     #pretrained = True
     debug = False
 
@@ -109,11 +109,6 @@ def switch_k_backend_device():
         os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 
-
-#tf1 = eval("GOOG")
-
-#print(tf1)
-#tf1.to_csv("testfile.csv")
 
 
 

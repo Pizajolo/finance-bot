@@ -4,3 +4,10 @@ SQLAlchemy
 bcrypt
 requests
 flask-heroku
+pandas
+tensorflow
+click
+numpy
+tqdm
+logging
+coloredlogs
