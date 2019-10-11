@@ -1,4 +1,11 @@
-tensorflow==1.10.0
-click==
-numpy==1.14.5
-tqdm==4.24.0
+pandas
+
+tensorflow
+click
+numpy
+tqdm
+
+logging
+coloredlogs
+
+
