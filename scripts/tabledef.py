@@ -3,7 +3,7 @@
 import sys
 import os
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 # Local
@@ -31,6 +31,7 @@ class User(Base):
     password = Column(String(512))
     email = Column(String(50))
     subscription = Column(Boolean)
+    sub_date = Column(DateTime)
 
     def __repr__(self):
         return '<User %r>' % self.username

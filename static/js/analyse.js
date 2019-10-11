@@ -1,35 +1,35 @@
 const xlabels = [];
 const prices = [];
-document.getElementById("subscribe-button").style.visibility = "hidden";
+document.getElementById("subscribe-button").style.display = "none";
 window.addEventListener('load', load_data);
 
-async function setup() {
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: xlabels,
-            datasets: [{
-                label: 'Apple price',
-                data: prices,
-                backgroundColor: 'rgba(78, 115, 223, 0.8)',
-                borderColor: 'rgba(78, 115, 223, 0.8)',
-                fill: false,
-                pointRadius: 0
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            maintainAspectRatio: false
-        }
-    });
-}
+// async function setup() {
+//     const ctx = document.getElementById('myChart').getContext('2d');
+//     const myChart = new Chart(ctx, {
+//         type: 'line',
+//         data: {
+//             labels: xlabels,
+//             datasets: [{
+//                 label: 'Apple price',
+//                 data: prices,
+//                 backgroundColor: 'rgba(78, 115, 223, 0.8)',
+//                 borderColor: 'rgba(78, 115, 223, 0.8)',
+//                 fill: false,
+//                 pointRadius: 0
+//             }]
+//         },
+//         options: {
+//             scales: {
+//                 yAxes: [{
+//                     ticks: {
+//                         beginAtZero: false
+//                     }
+//                 }]
+//             },
+//             maintainAspectRatio: false
+//         }
+//     });
+// }
 
 async function load_data() {
     const request = new XMLHttpRequest();
@@ -41,8 +41,8 @@ async function load_data() {
         // Extract JSON data from request
         const data = JSON.parse(request.responseText);
         console.log(data['Subscription']);
-        if(data['Subscription']===false){
-            document.getElementById("subscribe-button").style.visibility = "visible";
+        if (data['Subscription'] === false) {
+            document.getElementById("subscribe-button").style.display = "block";
         }
         const ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {

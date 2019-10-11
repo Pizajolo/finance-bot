@@ -13,6 +13,13 @@ import sys
 import numpy as np
 import os
 from eval import eval
+import stripe
+
+
+api_test_key = 'pk_test_ZGjcdWhwzPlqCxlrY0AmuQQu00lX6ZWN27'
+api_test_secret_key = 'sk_test_16AIFAVEEKxLYPGkEG8XlCMZ00N981yRv0'
+
+stripe.api_key = api_test_secret_key
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -147,8 +154,12 @@ def search():
     stock = request.form.get("search_query")
     user = helpers.get_user()
     sub = user.subscription
+    sub_data = user.sub_date
+    if sub:
+        if datetime.datetime.now() > sub_data:
+            helpers.change_user(subscription=False)
+            sub = False
     df = eval(stock, sub)
-    print(sub)
     prices = df['actual'].values.tolist()
     date = []
     for i in range(len(df)):
@@ -178,22 +189,53 @@ def analyse():
                             start=datetime.datetime(2019, 9, 2),  # start
                             end=datetime.datetime(2019, 9, 10))  # end
         user = helpers.get_user()
-        return render_template('analyse.html', user=user, name=stock)
+        return render_template('analyse.html', user=user, name=stock, key=api_test_key)
     except:
         return redirect(url_for('home'))
 
 
-@app.route('/subscribe', methods=['GET'])
+@app.route('/subscribe', methods=['Post'])
 def subscribe():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
+    try:
+        # amount in cents
+        amount = 99
+
+        customer = stripe.Customer.create(
+            email='sample@customer.com',
+            source=request.form['stripeToken']
+        )
+
+        stripe.Charge.create(
+            customer=customer.id,
+            amount=amount,
+            currency='usd',
+            description='Flask Charge'
+        )
+        user = helpers.get_user()
+        sub = user.subscription
+        if not sub:
+            helpers.change_user(subscription=True)
+            date = datetime.datetime.now()+datetime.timedelta(days=31)
+            helpers.change_user(sub_date=date)
+        else:
+            if datetime.datetime.now() > user.sub_date:
+                date = datetime.datetime.now()+datetime.timedelta(days=31)
+            else:
+                date = user.sub_date+datetime.timedelta(days=31)
+            helpers.change_user(sub_date=date)
+    except:
+        print('subscrption didnt work')
     user = helpers.get_user()
-    sub = user.subscription
-    if not sub:
-        helpers.change_user(subscription=True)
-    else:
-        helpers.change_user(subscription=False)
-    return redirect(url_for('home'))
+    return render_template('profile.html', user=user)
+    # user = helpers.get_user()
+    # sub = user.subscription
+    # if not sub:
+    #     helpers.change_user(subscription=True)
+    # else:
+    #     helpers.change_user(subscription=False)
+    # return redirect(url_for('home'))
 
 
 # ======== Main ============================================================== #

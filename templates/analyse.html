@@ -27,8 +27,10 @@
                         <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button">
                             <i
                                     class="fas fa-bars"></i></button>
-                        <form action="/analyse" method="GET" class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text" name="stock"
+                        <form action="/analyse" method="GET"
+                              class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
+                                                            name="stock"
                                                             placeholder="Search for Share...">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i>
@@ -97,8 +99,24 @@
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <!-- Start: #share -->
                         <h3 id="share_name" class="text-dark mb-0">{{ name }}</h3>
-                        <!-- End: #share --><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"
-                                               href="subscribe" id="subscribe-button"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Subscribe</a></div>
+                        <!-- End: #share -->
+                        <!-- <a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"
+                                               id="subscribe-button"><i
+                            class="fas fa-download fa-sm text-white-50"></i>&nbsp;Subscribe</a> -->
+                        <div id="subscribe-button">
+                        <form action="/subscribe" method="post">
+                            <script
+                                    src="https://checkout.stripe.com/checkout.js"
+                                    class="stripe-button"
+                                    data-key="{{ key }}"
+                                    data-description="one Month Subscription"
+                                    data-amount="99"
+                                    data-locale="auto">
+                            </script>
+                        </form>
+                            </div>
+                    </div>
+
                     <!-- Start: Chart -->
                     <div class="row">
                         <div class="col">
@@ -113,11 +131,13 @@
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in"
                                              role="menu">
                                             <p class="text-center dropdown-header">dropdown header:</p><a
-                                                class="dropdown-item" role="presentation" href="#">&nbsp;Action</a><a
+                                                class="dropdown-item" role="presentation"
+                                                href="#">&nbsp;Action</a><a
                                                 class="dropdown-item" role="presentation" href="#">&nbsp;Another
                                             action</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" role="presentation" href="#">&nbsp;Something else
+                                            <a class="dropdown-item" role="presentation" href="#">&nbsp;Something
+                                                else
                                                 here</a></div>
                                     </div>
                                 </div>
@@ -141,7 +161,8 @@
                                             </div>
                                             <div class="text-dark font-weight-bold h5 mb-0"><span>5,04%</span></div>
                                         </div>
-                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +175,8 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1">
                                                 <span>Earnings (annual)</span>
                                             </div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>64,32%</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>64,32%</span>
+                                            </div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
@@ -176,5 +198,6 @@
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 {% endblock %}
 {% block scripts %}
-<script src="../static/js/analyse.js"></script>
+    <script src="../static/js/analyse.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
