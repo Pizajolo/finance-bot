@@ -9,7 +9,7 @@ This is financial Advisory Intelligence, an website which shows how a reinforcme
 - [x] Python 3.x compliant.
 - [x] One time Stripe payment (pay for one month)
 - [x] Flask backend.
-- [x] Loading Keras(tensorflow) mode.
+- [x] Loading Keras(tensorflow) model.
 - [x] Prediction on real time fetched data of yahoo-finance.
 - [x] If not subscribed, only return 10 day old data
 - [ ] Reset password via email.
