@@ -9,6 +9,7 @@ from keras import backend as K
 from agent import Agent
 from evaluate import evaluate_model
 
+
 def eval(stock, abo=False):
     K.clear_session()
     from utils import (

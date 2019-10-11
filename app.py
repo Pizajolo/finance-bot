@@ -124,7 +124,7 @@ def forgot_pw():
 @app.route('/graph')
 def graph():
     # csv_file_path = 'media/AAPL.csv'
-    csv_file_path = 'testfile.csv'
+    csv_file_path = './media/testfile.csv'
     df = pd.read_csv(csv_file_path)
     prices = df['actual'].values.tolist()
     date = df['Date'].values.tolist()
@@ -145,9 +145,10 @@ def search():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     stock = request.form.get("search_query")
-    print(stock)
-    df = eval(stock)
-    print(df)
+    user = helpers.get_user()
+    sub = user.subscription
+    df = eval(stock, sub)
+    print(sub)
     prices = df['actual'].values.tolist()
     date = []
     for i in range(len(df)):
@@ -160,7 +161,8 @@ def search():
     prices_buy = df_buy['actual'].values.tolist()
     df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
     prices_sell = df_sell['actual'].values.tolist()
-    return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell},
+    return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell,
+                       'Subscription': sub},
                       ignore_nan=True)
     # except:
     #     return json.dumps({'status': 'Stock does not exist'})
@@ -179,6 +181,19 @@ def analyse():
         return render_template('analyse.html', user=user, name=stock)
     except:
         return redirect(url_for('home'))
+
+
+@app.route('/subscribe', methods=['GET'])
+def subscribe():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    user = helpers.get_user()
+    sub = user.subscription
+    if not sub:
+        helpers.change_user(subscription=True)
+    else:
+        helpers.change_user(subscription=False)
+    return redirect(url_for('home'))
 
 
 # ======== Main ============================================================== #

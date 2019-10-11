@@ -1,6 +1,6 @@
 const xlabels = [];
 const prices = [];
-
+document.getElementById("subscribe-button").style.visibility = "hidden";
 window.addEventListener('load', load_data);
 
 async function setup() {
@@ -40,7 +40,10 @@ async function load_data() {
     request.onload = () => {
         // Extract JSON data from request
         const data = JSON.parse(request.responseText);
-        console.log(data['Date']);
+        console.log(data['Subscription']);
+        if(data['Subscription']===false){
+            document.getElementById("subscribe-button").style.visibility = "visible";
+        }
         const ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
