@@ -16,6 +16,7 @@ This is financial Advisory Intelligence, an website which shows how a reinforcme
 - [ ] Add Stripe dual Authentication(needed for Europe).
 - [ ] Add Stripe monthly subscription.
 - [ ] Optimization of Reinforcement model.
+- [ ] The return of investment is not real(add update function).
 
 find out what we are doing now:
  [Trello](https://trello.com/b/PZsNx0rx/finance-adviser-bot)
