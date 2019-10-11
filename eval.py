@@ -28,13 +28,14 @@ def eval(stock, abo=False):
     debug = False
 
     # Load Data
-    start_test = datetime.datetime(2018, 6, 1)
+    # start_test = datetime.datetime(2018, 6, 1)
 
     if abo == True:
         end_test = datetime.datetime.now()
     else:
         end_test = datetime.datetime.now()-datetime.timedelta(days = 10) # in case of no abo: only old state available
 
+    start_test = end_test-datetime.timedelta(weeks = 52)
 
     # Load Stock
     df_test = web.DataReader([stock], 'yahoo',
