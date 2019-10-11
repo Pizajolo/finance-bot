@@ -35,7 +35,7 @@ def get_user():
 
 def add_user(username, password, email):
     with session_scope() as s:
-        u = tabledef.User(username=username, password=password.decode('utf8'), email=email)
+        u = tabledef.User(username=username, password=password.decode('utf8'), email=email, subscription=False)
         s.add(u)
         s.commit()
 
