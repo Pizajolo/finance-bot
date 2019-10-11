@@ -1,3 +1,4 @@
+document.getElementById("alert").style.visibility = "hidden";
 function message(status, shake=false, id="") {
   if (shake) {
     $("#"+id).effect("shake", {direction: "right", times: 2, distance: 8}, 250);
@@ -19,7 +20,11 @@ var login = function() {
     success(response){
       var status = JSON.parse(response)["status"];
       if (status === "Login successful") { location.reload(); }
-      else { error("login-input"); }
+      else {
+        // message(status, true, "alert");
+        document.getElementById('alert').innerHTML += status;
+        document.getElementById("alert").style.visibility = "visible";
+      }
     }
   });
 };
@@ -39,7 +44,10 @@ $(document).ready(function() {
       success(response) {
         var status = JSON.parse(response)["status"];
         if (status === "Signup successful") { location.reload(); }
-        else { message(status, true, "signup-box"); }
+        else {
+          document.getElementById('alert').innerHTML += status;
+          document.getElementById("alert").style.visibility = "visible";
+        }
       }
     });
   });
