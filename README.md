@@ -19,5 +19,8 @@ For the ML model we use a Deep Q Reinforcement Learning Model based on this gith
 - [ ] Optimization of Reinforcement model.
 - [ ] The return of investment is not real(add update function).
 
+## How it looks:
+![](./media/Bildschirmfoto%202019-10-12%20um%2011.04.29.png)
+
 find out what we are doing now:
  [Trello](https://trello.com/b/PZsNx0rx/finance-adviser-bot)
