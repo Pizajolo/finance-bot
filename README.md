@@ -1,7 +1,8 @@
 # finance-bot
 ![](./static/assets/img/avatars/Aktie03neu.png)
 
-This is financial Advisory Intelligence, an website which shows how a reinforcment model traded on real Stock data.
+This is financial Advisory Intelligence, an website which shows how a ML model traded on real Stock data.
+For the ML model we use a Deep Q Reinforcement Learning Model based on this github [repo](https://github.com/pskrunner14/trading-bot). To try it out, check out our [Train_model](https://github.com/Pizajolo/finance-bot/blob/master/Train_model.ipynb) jupyter notebook.
 ## Features:
 - [x] User account sign up, sign in, password reset.
 - [x] Form generation.
