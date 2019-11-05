@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: new EdgeInsets.all(15.0),
                 child: new TextFormField(
                   controller: _usernameController,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
                   autofocus: false,
                   decoration: InputDecoration(
                     hintText: 'Username',

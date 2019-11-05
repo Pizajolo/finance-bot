@@ -32,7 +32,7 @@ class SearchPage extends StatelessWidget {
                 padding: new EdgeInsets.all(50.0),
                 child: new TextFormField(
                   controller: _searchController,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
                   autofocus: false,
                   decoration: InputDecoration(
                     hintText: 'Search...',
@@ -63,5 +63,11 @@ class SearchPage extends StatelessWidget {
         );
   }
 
-  void _performSearch() async {}
+  void _performSearch() async {
+    String stock = _searchController.text;
+    var response = await session.post('http://127.0.0.1:5000/api/search', {
+      'search_query': stock
+    });
+    print(response['code']);
+  }
 }

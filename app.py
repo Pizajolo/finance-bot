@@ -257,6 +257,44 @@ def login_api():
     return json.dumps({'status': 'user logged in', 'code': 202})
 
 
+# -------- Search Share API ---------------------------------------------------------- #
+@app.route('/api/search',methods=["POST"])
+def search_api():
+    if not session.get('logged_in'):
+        return json.dumps({'status': 'Not logged in', 'code': 403})
+    else:
+        stock = request.form.get("search_query")
+        try:
+            df = web.DataReader(stock, 'yahoo',
+                                start=datetime.datetime(2019, 9, 2),  # start
+                                end=datetime.datetime(2019, 9, 10))  # end
+            user = helpers.get_user()
+            sub = user.subscription
+            sub_data = user.sub_date
+            if sub:
+                if datetime.datetime.now() > sub_data:
+                    helpers.change_user(subscription=False)
+                    sub = False
+            df = eval(stock, sub)
+            prices = df['actual'].values.tolist()
+            date = []
+            for i in range(len(df)):
+                date.append(str(df.at[i, 'Date'])[0:10])
+            # date = df['Date'].apply(str).values.tolist()
+            df.loc[df['action'] == 'HOLD', 'actual'] = None
+            df_buy = df.copy()
+            df_sell = df.copy()
+            df_buy.loc[df_buy['action'] == 'SELL', 'actual'] = None
+            prices_buy = df_buy['actual'].values.tolist()
+            df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
+            prices_sell = df_sell['actual'].values.tolist()
+            return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell,
+                               'Subscription': sub, 'code': 301},
+                              ignore_nan=True)
+        except:
+            return json.dumps({'status': 'Stock not found', 'code': 302})
+
+
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
