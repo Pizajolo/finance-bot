@@ -40,6 +40,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # return render_template('login.html')
+    print(session)
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
         if request.method == 'POST':
@@ -236,6 +237,24 @@ def subscribe():
     # else:
     #     helpers.change_user(subscription=False)
     # return redirect(url_for('home'))
+
+
+# -------- Login API ------------------------------------------------------------- #
+@app.route('/api/login', methods=['POST'])
+def login_api():
+    if not session.get('logged_in'):
+        if request.method == 'POST':
+            username = request.form.get("username")
+            password = request.form.get("password")
+            if helpers.credentials_valid(username, password):
+                print("Hello")
+                session['logged_in'] = True
+                session['username'] = username
+                print(session)
+                return json.dumps({'status': 'Login successful'})
+            return json.dumps({'status': 'Invalid user/pass'})
+        return json.dumps({'status': 'Accept only Post'})
+    return json.dumps({'status': 'user logged in'})
 
 
 # ======== Main ============================================================== #
