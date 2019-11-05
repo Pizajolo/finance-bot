@@ -251,10 +251,10 @@ def login_api():
                 session['logged_in'] = True
                 session['username'] = username
                 print(session)
-                return json.dumps({'status': 'Login successful'})
-            return json.dumps({'status': 'Invalid user/pass'})
-        return json.dumps({'status': 'Accept only Post'})
-    return json.dumps({'status': 'user logged in'})
+                return json.dumps({'status': 'Login successful', 'code': 201})
+            return json.dumps({'status': 'Invalid user/pass', 'code': 401})
+        return json.dumps({'status': 'Accept only Post', 'code': 402})
+    return json.dumps({'status': 'user logged in', 'code': 202})
 
 
 # ======== Main ============================================================== #
