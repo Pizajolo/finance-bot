@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Padding(
+            new Padding(
               padding: EdgeInsets.symmetric(vertical: 30.0),
               child: MaterialButton(
                 minWidth: 200.0,

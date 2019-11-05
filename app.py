@@ -247,14 +247,19 @@ def login_api():
             username = request.form.get("username")
             password = request.form.get("password")
             if helpers.credentials_valid(username, password):
-                print("Hello")
                 session['logged_in'] = True
                 session['username'] = username
-                print(session)
                 return json.dumps({'status': 'Login successful', 'code': 201})
             return json.dumps({'status': 'Invalid user/pass', 'code': 401})
         return json.dumps({'status': 'Accept only Post', 'code': 402})
     return json.dumps({'status': 'user logged in', 'code': 202})
+
+
+# -------- Logout API ------------------------------------------------------------- #
+@app.route("/api/logout")
+def logout_api():
+    session['logged_in'] = False
+    return json.dumps({'status': 'logged out', 'code': 210})
 
 
 # -------- Search Share API ---------------------------------------------------------- #
@@ -263,11 +268,14 @@ def search_api():
     if not session.get('logged_in'):
         return json.dumps({'status': 'Not logged in', 'code': 403})
     else:
+        print("request search")
         stock = request.form.get("search_query")
         try:
+            print("check Stock", stock)
             df = web.DataReader(stock, 'yahoo',
                                 start=datetime.datetime(2019, 9, 2),  # start
                                 end=datetime.datetime(2019, 9, 10))  # end
+            print("checked Stock")
             user = helpers.get_user()
             sub = user.subscription
             sub_data = user.sub_date
@@ -275,7 +283,9 @@ def search_api():
                 if datetime.datetime.now() > sub_data:
                     helpers.change_user(subscription=False)
                     sub = False
+            print("evaluation start")
             df = eval(stock, sub)
+            print("evaluation end")
             prices = df['actual'].values.tolist()
             date = []
             for i in range(len(df)):

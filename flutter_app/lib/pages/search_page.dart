@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import './../utils/session.dart';
 import './login_page.dart';
+import './graph_page.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget{
+  final Session session;
+  SearchPage(this.session);
+  @override
+  State<StatefulWidget> createState() => _SearchPageState(session);
+}
+
+
+class _SearchPageState extends State<SearchPage> {
   final Session session;
   final _searchController = TextEditingController();
 
-  SearchPage(this.session);
+  _SearchPageState(this.session);
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +80,19 @@ class SearchPage extends StatelessWidget {
 
   void _performSearch() async {
     String stock = _searchController.text;
+    print("Send search request");
     var response = await session.post('http://127.0.0.1:5000/api/search', {
       'search_query': stock
     });
+    if(response['code']==301){
+//      Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new GraphPage()));
+      Navigator.of(context)
+          .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+        return new GraphPage(response);
+      }));
+    }
     print(response['code']);
   }
 }
+
+

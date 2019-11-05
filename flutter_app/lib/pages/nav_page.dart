@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/logout_page.dart';
 import './../utils/session.dart';
 import './search_page.dart';
 
@@ -13,16 +14,6 @@ class _NavPageState extends State<NavPage> {
   final Session session;
   _NavPageState(this.session);
   int _currentIndex = 0;
-  @override
-//  void initState() {
-//    //StartFunc();
-//    super.initState();
-//    _NavPageState(this.session);
-//    final List<Widget> _children = [
-//      SearchPage(session),
-//    ];
-//
-//  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +50,9 @@ class _NavPageState extends State<NavPage> {
   Widget getPage(int index) {
     if (index == 0) {
       return SearchPage(session);
+    }
+    if (index == 2) {
+      return LogoutPage(session);
     }
     return SearchPage(session);
   }
