@@ -262,6 +262,19 @@ def logout_api():
     return json.dumps({'status': 'logged out', 'code': 210})
 
 
+# -------- Profile API ---------------------------------------------------------- #
+@app.route('/api/profile', methods=['GET', 'POST'])
+def settings_api():
+    if session.get('logged_in'):
+        user = helpers.get_user()
+        username = user.username
+        email = user.email
+        has_subscription = user.subscription
+        sub_date = user.sub_date
+        return json.dumps({'status': 'User data', 'Username': username, 'Email': email, 'Subscription': has_subscription, 'Date': str(sub_date)[0:10], 'code': 220})
+    return json.dumps({'status': 'Not logged in', 'code': 403})
+
+
 # -------- Search Share API ---------------------------------------------------------- #
 @app.route('/api/search',methods=["POST"])
 def search_api():

@@ -14,7 +14,8 @@ class _LogoutPageState extends State<LogoutPage> {
   _LogoutPageState(this.session);
   @override
   Widget build(BuildContext context) {
-    return new Material(
+    return new SizedBox.expand(
+        child: new Material(
       color: Colors.blueAccent,
       child: new Column(
         mainAxisSize: MainAxisSize.max,
@@ -36,7 +37,7 @@ class _LogoutPageState extends State<LogoutPage> {
                     fontWeight: FontWeight.bold)),
           ),
           new Padding(
-            padding: EdgeInsets.symmetric(horizontal: 150.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: MaterialButton(
               minWidth: 200.0,
               height: 50.0,
@@ -51,6 +52,7 @@ class _LogoutPageState extends State<LogoutPage> {
           ),
         ],
       ),
+    ),
     );
   }
   void _performLogout() async {

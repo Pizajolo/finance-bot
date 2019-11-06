@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                       fontSize: 50.0,
                       fontWeight: FontWeight.bold)),
               new Padding(
-                padding: new EdgeInsets.all(50.0),
+                padding: new EdgeInsets.all(35.0),
                 child: new TextFormField(
                   controller: _searchController,
                   keyboardType: TextInputType.text,

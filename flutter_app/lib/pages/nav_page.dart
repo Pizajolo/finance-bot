@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/logout_page.dart';
+import 'package:flutter_app/pages/profil_page.dart';
 import './../utils/session.dart';
 import './search_page.dart';
 
@@ -16,7 +17,8 @@ class _NavPageState extends State<NavPage> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new MaterialApp(
+    home: Scaffold(
       appBar: AppBar(
         title: Text('financial Advisory Intelligence'),
       ),
@@ -39,7 +41,7 @@ class _NavPageState extends State<NavPage> {
           )
         ],
       ),
-    );
+    ),);
   }
   void onTabTapped(int index) {
     setState(() {
@@ -50,6 +52,9 @@ class _NavPageState extends State<NavPage> {
   Widget getPage(int index) {
     if (index == 0) {
       return SearchPage(session);
+    }
+    if (index == 1) {
+      return ProfilePage(session);
     }
     if (index == 2) {
       return LogoutPage(session);
