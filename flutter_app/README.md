@@ -8,11 +8,13 @@ this flutter app works with the fAI Backend. You are only able to login if you r
 - [x] [Flask backend](https://github.com/Pizajolo/finance-bot/blob/flutter_app/app.py)
 - [x] Prediction on real time fetched data of yahoo-finance.
 - [x] If not subscribed, only return 10 day old data
+- [x] Added Loading symbol when app gets stock data
 - [ ] Add in app registration (only possible via website)
 - [ ] Add possibility to change profile details
 - [ ] Improve the graph_page with nicer plots
 - [ ] Show how many shares are traded by the AI
-
+## App
+![](./assets/gif/fAI-app.gif)
 
 #### For more checkout:
 A few resources to get you started:

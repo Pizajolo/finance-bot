@@ -1,11 +1,14 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/search_page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 
 class GraphPage extends StatefulWidget {
   final stockData;
+
+
 
   GraphPage(this.stockData);
 
@@ -14,6 +17,7 @@ class GraphPage extends StatefulWidget {
 
 class _GraphPageState extends State<GraphPage> {
   final stockData;
+
 
   _GraphPageState(this.stockData);
 
