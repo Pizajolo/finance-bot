@@ -311,8 +311,8 @@ def search_api():
             prices_buy = df_buy['actual'].values.tolist()
             df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
             prices_sell = df_sell['actual'].values.tolist()
-            return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell,
-                               'Subscription': sub, 'code': 301},
+            return json.dumps({'Stock': stock,'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell,
+                               'Subscription': sub, 'Return-fAI': "---", 'Return-holding': "---", 'code': 301},
                               ignore_nan=True)
         except:
             return json.dumps({'status': 'Stock not found', 'code': 302})
