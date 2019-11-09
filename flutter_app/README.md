@@ -1,16 +1,22 @@
-# flutter_app
+# flutter_app fAI
+this flutter app works with the fAI Backend. You are only able to login if you registered on the fAI website.
 
-A new Flutter project.
+## Features:
+- [x] User account sign in (based on Website registration)
+- [x] User profile
+- [x] Logout and Login
+- [x] [Flask backend](https://github.com/Pizajolo/finance-bot/blob/flutter_app/app.py)
+- [x] Prediction on real time fetched data of yahoo-finance.
+- [x] If not subscribed, only return 10 day old data
+- [ ] Add in app registration (only possible via website)
+- [ ] Add possibility to change profile details
+- [ ] Improve the graph_page with nicer plots
+- [ ] Show how many shares are traded by the AI
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
+#### For more checkout:
+A few resources to get you started:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [online documentation](https://flutter.dev/docs)

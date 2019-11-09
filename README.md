@@ -13,6 +13,7 @@ For the ML model we use a Deep Q Reinforcement Learning Model based on this gith
 - [x] Loading Keras(tensorflow) model.
 - [x] Prediction on real time fetched data of yahoo-finance.
 - [x] If not subscribed, only return 10 day old data
+- [x] Add **Flutter** app (check out this [Readme](https://github.com/Pizajolo/finance-bot/tree/flutter_app/flutter_app))
 - [ ] Reset password via email.
 - [ ] Add Stripe dual Authentication(needed for Europe).
 - [ ] Add Stripe monthly subscription.
