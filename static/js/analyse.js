@@ -3,6 +3,7 @@ const prices = [];
 document.getElementById("subscribe-button").style.display = "none";
 window.addEventListener('load', load_data);
 
+
 // async function setup() {
 //     const ctx = document.getElementById('myChart').getContext('2d');
 //     const myChart = new Chart(ctx, {
@@ -44,6 +45,8 @@ async function load_data() {
         if (data['Subscription'] === false) {
             document.getElementById("subscribe-button").style.display = "block";
         }
+        document.getElementById("return-fai").textContent = data['Return-fAI'];
+        document.getElementById("return-holding").textContent = data['Return-holding'];
         const ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',

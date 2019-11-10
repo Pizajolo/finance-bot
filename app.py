@@ -40,7 +40,6 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # return render_template('login.html')
-    print(session)
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
         if request.method == 'POST':
@@ -164,7 +163,7 @@ def search():
     prices = df['actual'].values.tolist()
     date = []
     for i in range(len(df)):
-        date.append(str(df.at[i,'Date'])[0:10])
+        date.append(str(df.at[i, 'Date'])[0:10])
     # date = df['Date'].apply(str).values.tolist()
     df.loc[df['action'] == 'HOLD', 'actual'] = None
     df_buy = df.copy()
@@ -174,7 +173,7 @@ def search():
     df_sell.loc[df_sell['action'] == 'BUY', 'actual'] = None
     prices_sell = df_sell['actual'].values.tolist()
     return json.dumps({'Date': date, 'Prices': prices, 'Buy_Prices': prices_buy, 'Sell_Prices': prices_sell,
-                       'Subscription': sub},
+                       'Subscription': sub, 'Return-fAI': "---", 'Return-holding': "---"},
                       ignore_nan=True)
     # except:
     #     return json.dumps({'status': 'Stock does not exist'})
